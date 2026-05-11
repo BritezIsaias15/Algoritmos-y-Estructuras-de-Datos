@@ -1,0 +1,35 @@
+static double CelciousAFarenheit(double celcious)
+{
+    Console.WriteLine("Ingrese la temperatura en celcious");
+    double.TryParse(Console.ReadLine(), out celcious);
+    celcious = celcious * 1.8 + 32;
+    Console.WriteLine($"La Conversión de celcious a farenheit es de {celcious}");
+    return celcious;
+}
+
+static double FarenheitACelcious(double farenheit)
+{
+    Console.WriteLine("Ingrese la temperatura en farenheit");
+    double.TryParse(Console.ReadLine(), out farenheit);
+    farenheit = farenheit - 32;
+    farenheit = farenheit % 0.555;
+    Console.WriteLine($"La Conversión de celcious a farenheit es de {farenheit}");
+    return farenheit;
+}
+
+Console.WriteLine("Seleccione una opcion \n 1: Conversión de Celcious a Farenheit \n 2: Conversión de Farenheit a Celcious");
+ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+switch (keyInfo.Key)
+{
+    case ConsoleKey.D1:
+        CelciousAFarenheit(0);
+        break;
+
+    case ConsoleKey.D2:
+        FarenheitACelcious(0);
+        break;
+    default:
+        Console.WriteLine("Ingrese una opción válida");
+        break;
+}
