@@ -1,0 +1,17 @@
+static int EsMayorDeEdad(int edad)
+{
+    Console.WriteLine("Ingrese su edad");
+    int.TryParse(Console.ReadLine(), out edad);
+
+    if (edad >= 18)
+    {
+        Console.WriteLine("True");
+    }
+    else
+    {
+        Console.WriteLine("False");
+    }
+    return edad;
+}
+
+EsMayorDeEdad(0);
