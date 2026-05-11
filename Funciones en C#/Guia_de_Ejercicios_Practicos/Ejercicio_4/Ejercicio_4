@@ -1,0 +1,26 @@
+int num1, num2, num3;
+
+Console.WriteLine("Ingrese el valor del numero 1:");
+int.TryParse(Console.ReadLine(), out num1);
+Console.WriteLine("Ingrese el valor del numero 2:");
+int.TryParse(Console.ReadLine(), out num2);
+Console.WriteLine("Ingrese el valor del numero 3:");
+int.TryParse(Console.ReadLine(), out num3);
+
+if (num1 > num2 && num1 > num3)
+{
+    Console.WriteLine($"El número {num1} es el mayor");
+}
+else if (num2 > num1 && num2 > num3)
+{
+    Console.WriteLine($"El número {num2} es el mayor");
+}
+else if (num3 > num1 && num3 > num2)
+{
+    Console.WriteLine($"El número {num1} es el mayor");
+}
+else
+{
+    Console.WriteLine("Son todos iguales");
+}
+
