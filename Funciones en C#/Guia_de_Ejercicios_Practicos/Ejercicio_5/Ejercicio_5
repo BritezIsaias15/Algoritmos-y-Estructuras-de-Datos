@@ -1,0 +1,32 @@
+
+realizarRetiro(0);
+
+static double realizarRetiro(double saldo)
+{
+    saldo = 10000;
+    while (saldo > 0)
+    {
+        Console.WriteLine("Ingrese el monto a retirar.");
+        double.TryParse(Console.ReadLine(), out double retiro);
+        if (retiro > saldo)
+        {
+            Console.Clear();
+            Console.WriteLine("Saldo insuficiente.");
+            Console.WriteLine($"Su saldo restante es de {saldo}$");
+        }
+        else if (retiro <= 0)
+        {
+            Console.Clear();
+            Console.WriteLine("Cantidad a retirar no válida.");
+            Console.WriteLine($"Su saldo restante es de {saldo}$");
+        }
+        else
+        {
+            saldo = saldo - retiro;
+            Console.Clear();
+            Console.WriteLine($"Su saldo restante es de {saldo}$");
+        }
+    }
+    return (saldo);
+}
+
