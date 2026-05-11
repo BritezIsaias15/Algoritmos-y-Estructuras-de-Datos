@@ -1,0 +1,37 @@
+double area = 0;
+bool shutdownMain = false;
+
+while (!shutdownMain)
+{
+    Console.WriteLine("Escoja una opción");
+    Console.WriteLine("1. Transformar radio a área | 2. Imprimir resultado. | 3. Salir");
+    ConsoleKeyInfo opcion = Console.ReadKey(true);
+    switch (opcion.Key)
+    {
+        case ConsoleKey.D1:
+            calcularAreaCirculo(out area);
+            break;
+        case ConsoleKey.D2:
+            imprimirResultado(area);
+            break;
+        case ConsoleKey.D3:
+            shutdownMain = true;
+            break;
+    }
+}
+
+static double calcularAreaCirculo(out double area)
+{
+    Console.WriteLine("Ingrese el radio del círculo");
+    double.TryParse(Console.ReadLine(), out double rad);
+    Console.WriteLine(rad);
+    area = 3.1416 * (rad * rad);
+    Console.WriteLine(area);
+    return area;
+}
+
+static void imprimirResultado(double area)
+{
+    Console.WriteLine($"--- EL RESULTADO ES: {area} ---");
+}
+
