@@ -1,2 +1,2 @@
-# Estrategia "Divide y Vencerás" 
+# Aplicación Algorítmica 
 
