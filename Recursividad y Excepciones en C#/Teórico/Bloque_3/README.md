@@ -1,1 +1,2 @@
+# Estrategia "Divide y Vencerás" 
 
