@@ -1,7 +1,7 @@
 using System.Timers;
 
-int[] arreglo1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-int ubicacion = 7;
+int[] arreglo1 = { 1, 0, 3, 4, 5, 6, 7, 8, 9, 10 };
+int ubicacion = 2;
 
 int posicion = busquedaB(arreglo1, ubicacion);
 
@@ -14,19 +14,21 @@ else
     Console.WriteLine("El número no se encuentra en el array.");
 }
 
-    static int busquedaB(int[] arreglo1, int ubicacion)
+static int busquedaB(int[] arreglo1, int ubicacion)
+{
+    int j = 0;
+    for (int i = 0; i < arreglo1.Length; i++)
     {
-        for (int i = 0; i < arreglo1.Length; i++)
+        if (arreglo1[i] == ubicacion)
         {
-            if (arreglo1[i] == ubicacion)
-            {
-                return i;
-            }
-            else
-            {
-                i = ubicacion - 2;
-            }
-
+            return j;
         }
-        return -1;
+        else
+        {
+            j = ubicacion - 2;
+            j++;
+        }
+
     }
+    return -1;
+}
