@@ -4,7 +4,7 @@ Console.WriteLine("Números primos en la lista:");
 
 int[] primos = IdentificarPrimos(array);
 
-foreach(int numeros in primos)
+foreach (int numeros in primos)
 {
     Console.Write(numeros + " ");
 }
@@ -19,11 +19,11 @@ int[] IdentificarPrimos(int[] array)
             //Primos obligatorios
             cant++;
         }
-        else if ()
+        else if (array[i] % 2 != 0 && array[i] % 3 != 0 && array[i] % 5 != 0 && array[i] % 7 != 0 && array[i] % 11 != 0)
         {
             cant++;
         }
-            Console.WriteLine(cant);
+        Console.WriteLine(cant);
     }
     int[] newArray = new int[cant];
     while (cant != 0)
@@ -38,7 +38,7 @@ int[] IdentificarPrimos(int[] array)
                 k++;
                 cant--;
             }
-            else if ()
+            else if (array[i] % 2 != 0 && array[i] % 3 != 0 && array[i] % 5 != 0 && array[i] % 7 != 0 && array[i] % 11 != 0)
             {
                 newArray[k] = array[i];
                 k++;
