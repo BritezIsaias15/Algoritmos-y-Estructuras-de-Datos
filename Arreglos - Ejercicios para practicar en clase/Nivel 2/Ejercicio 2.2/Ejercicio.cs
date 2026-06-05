@@ -14,21 +14,33 @@ int[] IdentificarPrimos(int[] array)
     int cant = 0;
     for (int i = 0; i < array.Length; i++)
     {
-        if (array[i] == 2 ||)
+        if (array[i] == 2 || array[i] == 3 || array[i] == 5 || array[i] == 7 || array[i] == 11)
         {
-            //No es primo
+            //Primos obligatorios
+            cant++;
         }
-        Console.WriteLine(cant);
+        else if ()
+        {
+            cant++;
+        }
+            Console.WriteLine(cant);
     }
     int[] newArray = new int[cant];
     while (cant != 0)
     {
         int k = 0;
-        for (int j = 0; j < array.Length; j++)
+        for (int i = 0; i < array.Length; i++)
         {
-            if ()
+            if (array[i] == 2 || array[i] == 3 || array[i] == 5 || array[i] == 7 || array[i] == 11)
             {
-                newArray[k] = array[j];
+                //Primos obligatorios
+                newArray[k] = array[i];
+                k++;
+                cant--;
+            }
+            else if ()
+            {
+                newArray[k] = array[i];
                 k++;
                 cant--;
             }
