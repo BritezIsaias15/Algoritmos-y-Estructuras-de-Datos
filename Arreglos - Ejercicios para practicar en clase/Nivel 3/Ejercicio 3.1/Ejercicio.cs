@@ -13,25 +13,33 @@ rotar = rotar % 5;
 
 int[] rotado = Rotar(array, rotar);
 
-foreach (int numeros in array)
+foreach (int numeros in rotado)
 {
     Console.Write(numeros + " ");
 }
-int[] Rotar(int[] array, int rotar)
+
+int[] Rotar(int[] array, int rotado)
 {
-    int aux;
-    int aux2;
-    for (int i = 0; i < rotar; i++)
+    if (rotado == 0)
     {
-        aux = array[1];
-        array[1] = array[0];
-        aux2 = array[2];
-        array[2] = aux;
-        aux = array[3];
-        array[3] = aux2;
-        aux2 = array[4];
-        array[4] = aux;
-        array[0] = aux2;
+        return array;
     }
-    return array;
+    else
+    {
+        int aux;
+        int aux2;
+        for (int i = 0; i < rotar; i++)
+        {
+            aux = array[1];
+            array[1] = array[0];
+            aux2 = array[2];
+            array[2] = aux;
+            aux = array[3];
+            array[3] = aux2;
+            aux2 = array[4];
+            array[4] = aux;
+            array[0] = aux2;
+        }
+        return array;
+    }
 }
