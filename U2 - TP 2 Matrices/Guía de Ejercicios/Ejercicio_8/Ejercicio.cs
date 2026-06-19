@@ -5,7 +5,7 @@ int[,] matriz = new int[3, 3]
     {8, 9, 5}
 };
 
-var(fila, columna) = Maximo(matriz);
+var(fila, columna) = Posicion(matriz);
 
 if (fila == -1 && columna == -1)
 {
@@ -16,7 +16,7 @@ else
     Console.WriteLine($"El número se encuentra en la posicion {fila}x{columna}.");
 }
 
-(int fila, int columna) Maximo(int[,] matriz)
+(int fila, int columna) Posicion(int[,] matriz)
 {
     Console.WriteLine("Ingrese el número que desea buscar en la matriz.");
     int.TryParse(Console.ReadLine(), out int num);
