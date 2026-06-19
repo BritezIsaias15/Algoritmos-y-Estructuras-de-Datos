@@ -5,11 +5,11 @@ int[,] matriz = new int[3, 3]
     {8, 9, 5}
 };
 
-var(suma, indice) = Maximo(matriz);
+var(suma, indice) = Suma(matriz);
 
 Console.WriteLine($"La suma de todos los valores de la fila {indice} es de {suma}.");
 
-(int suma, int indice) Maximo(int[,] matriz)
+(int suma, int indice) Suma(int[,] matriz)
 {
     Console.WriteLine("Ingrese la fila que desea sumar.(0-2)");
     int.TryParse(Console.ReadLine(), out int indice);
