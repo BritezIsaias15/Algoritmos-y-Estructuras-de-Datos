@@ -1,3 +1,15 @@
-# Consigna
+# Algoritmos-y-Estructuras-de-Datos
 
-Escribir un método que dada una matriz de enteros devuelva la suma de los elementos que contiene la matriz.
+## Datos del Alumno
+
+Alumno: Isaias Britez
+
+Correo: britezisaias152@gmail.com
+
+Curso y División: 4°1
+
+## Datos de la Materia
+
+Docente: Fabrizio Nahuel Romero
+
+Materia: Algoritmos y Estructuras de Datos
