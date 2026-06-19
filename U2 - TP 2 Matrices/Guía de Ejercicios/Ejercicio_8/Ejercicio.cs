@@ -1,5 +1,3 @@
-using System.Timers;
-
 int[,] matriz = new int[3, 3]
 {
     {7, 2, 4},
