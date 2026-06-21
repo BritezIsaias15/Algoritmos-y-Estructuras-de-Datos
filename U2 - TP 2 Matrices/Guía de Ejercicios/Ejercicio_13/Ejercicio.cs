@@ -50,16 +50,14 @@ int[,] Rotar(int[,] matriz)
         while (rotar > 0)
         {
             int columna = matriz.GetLength(1);
-            int aux1;
-            int aux2;
+            int aux;
 
             for (int i = 0; i < matriz.GetLength(0); i++)
             {
-                aux1 = matriz[i, 1];
+                aux = matriz[i, 2];
+                matriz[i, 2] = matriz[i, 1];
                 matriz[i, 1] = matriz[i, 0];
-                aux2 = matriz[i, 2];
-                matriz[i, 2] = aux1;
-                matriz[i, 0] = aux2;
+                matriz[i, 0] = aux;
             }
             rotar--;
         }
