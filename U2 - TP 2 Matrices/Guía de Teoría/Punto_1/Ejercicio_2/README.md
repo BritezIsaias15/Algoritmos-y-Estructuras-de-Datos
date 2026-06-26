@@ -4,4 +4,4 @@
 
 # Desarrollo
 
-Se puede representar como (tipo de dato)[,] matriz = new (tipo de dato)[filas, columnas]; o (tipo de dato)[][] matriz = new (tipo de dato)[filas, columnas];
+Para representar una matriz de dos dimensiones se utiliza, por ejemplo: int[,] matriz = new int[3,3] o se puede reemplazar "new int[3,3]" directamente con los valores de la matriz según su tamaño. También se puede reemplazar "int[,]" con "int[][]".
