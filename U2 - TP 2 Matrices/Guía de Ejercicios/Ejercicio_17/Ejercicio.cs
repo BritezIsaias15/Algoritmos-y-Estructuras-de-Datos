@@ -14,25 +14,51 @@ double[,] matriz2 = new double[3, 3]
 
 double[,] matriz = ProductoMatrices(matriz1, matriz2);
 
-for (int i = 0; i < matriz1.GetLength(0); i++)
+if (matriz.GetLength(0) == 0 || matriz.GetLength(1) == 0)
 {
-    for (int j = 0; j < matriz1.GetLength(1); j++)
+    Console.WriteLine("Las matrices no se pueden multiplicar");
+}
+else
+{
+    for (int i = 0; i < matriz1.GetLength(0); i++)
     {
-        Console.Write(matriz[i, j] + " ");
+        for (int j = 0; j < matriz2.GetLength(1); j++)
+        {
+            Console.Write(matriz[i, j].ToString("F2") + "\t");
+        }
+        Console.WriteLine();
     }
-    Console.WriteLine();
 }
 
 double[,] ProductoMatrices(double[,] matriz1, double[,] matriz2)
 {
-    double[,] matrizResultado = new double[3, 3];
+    double[,] Null = new double[0, 0];
 
-    for (int i = 0; i < matriz1.GetLength(0); i++)
+    int fila1 = matriz1.GetLength(0);
+    int fila2 = matriz2.GetLength(0);
+    int columna1 = matriz1.GetLength(1);
+    int columna2 = matriz2.GetLength(1);
+
+    double[,] matrizResultado = new double[fila1, columna2];
+
+    if (fila2 != columna1)
     {
-        for (int j = 0; j < matriz1.GetLength(1); j++)
-        {
-            matrizResultado[i, j] = matriz1[i, j] * matriz2[i, j];
-        }
+        return Null;
     }
-    return matrizResultado;
+    else
+    {
+        for (int i = 0; i < fila1; i++)
+        {
+            for (int j = 0; j < columna2; j++)
+            {
+                double suma = 0;
+                for (int k = 0; k < columna1; k++)
+                {
+                    suma += matriz1[i, k] * matriz2[k, j];
+                }
+                matrizResultado[i, j] = suma;
+            }
+        }
+        return matrizResultado;
+    }
 }
