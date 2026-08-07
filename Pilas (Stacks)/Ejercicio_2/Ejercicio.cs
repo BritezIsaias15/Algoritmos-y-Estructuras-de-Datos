@@ -33,14 +33,16 @@ bool Comprobar(string calc)
         {
             pila.Push(c);
         }
-        else if (pila.Peek() == '(' && c == ')')
+        if (pila.Count() > 0)
         {
-            pila.Pop(); 
+            if (c == ')')
+            {
+                pila.Pop();
+            }
         }
-        else if (pila.Peek() != '(' && c == ')')
+        if (c == ')')
         {
-            resultado = false;
-            break;
+            return false;
         }
     }
     return resultado;
