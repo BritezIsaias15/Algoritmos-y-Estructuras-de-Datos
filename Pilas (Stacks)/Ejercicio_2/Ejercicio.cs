@@ -3,7 +3,7 @@ using System.Runtime.ConstrainedExecution;
 Console.WriteLine("Ingrese una expresión matemática.");
 string calc = Console.ReadLine();
 
-if (calc == null)
+if (calc == "")
 {
     Console.WriteLine("No ha ingresado nada.");
 }
@@ -22,7 +22,6 @@ else
 
 bool Comprobar(string calc)
 {
-    bool resultado = true;
     char[] cadena = calc.ToCharArray();
 
     var pila = new Stack<char>();
@@ -40,10 +39,17 @@ bool Comprobar(string calc)
                 pila.Pop();
             }
         }
-        if (c == ')')
+        else if (c == ')')
         {
             return false;
         }
     }
-    return resultado;
+    if (pila.Count() > 0)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
