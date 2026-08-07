@@ -1,6 +1,4 @@
-using System.Runtime.ConstrainedExecution;
-
-Console.WriteLine("Ingrese una página o atras.");
+Console.WriteLine("Seleccione una opción \n1.Ir a página\t 2.Atrás");
 string texto = Console.ReadLine();
 
 if (texto == "")
@@ -10,18 +8,12 @@ if (texto == "")
 else
 {
     var result = Navegar(texto);
-    if (result)
-    {
-        Console.WriteLine("n");
-    }
-    else
-    {
-        Console.WriteLine("s");
-    }
+
 }
 
 string Navegar(string texto)
 {
-    var pila = new Stack<char>();
+    var pila = new Stack<string>();
+
 
 }
