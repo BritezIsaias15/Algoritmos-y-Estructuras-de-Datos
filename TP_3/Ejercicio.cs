@@ -3,28 +3,42 @@ using System.Formats.Tar;
 using System.Net.Sockets;
 
 bool shutdown = false;
-Juegos[] catalogo = new Juegos[100];
+Juegos[] catalogo = new Juegos[4];
+int[,] gondola = new int[2, 2];
 
 Inventario.CargarCatalogoInicial(catalogo);
 Inventario.Mostrar(catalogo);
 
 while (!shutdown)
 {
-    Console.WriteLine($"Ingrese una opción\n1.Ingresar videojuego\t2.Buscar videojuego\t3.Mostrar videojuegos");
+    Console.WriteLine($"Ingrese una opción\n1.Buscar videojuego\t2.Mostrar videojuegos");
     int.TryParse(Console.ReadLine(), out int opcion);
 
     switch (opcion)
     {
         case 1:
-            Inventario.AgregarJuego(catalogo);
-            break;
-        case 2:
             Inventario.BuscarJuego(catalogo);
             break;
-        case 3:
+        case 2:
             Inventario.Mostrar(catalogo);
             break;
+        case 3:
+            ConsultarProducto(catalogo);
+            break;
+        case 4:
+            EncolarCliente();
+            break;
+        case 5:
+            ConsultarSigCliente();
+            break;
+        case 6:
+            CobrarCliente():
+            break;
+        case 7:
+            shutdown = true;
+            break;
         default:
+            Console.Clear();
             Console.WriteLine("Ingrese una opción válida.");
             Console.Clear();
             break;
@@ -43,24 +57,33 @@ public struct Juegos
 public struct Cliente
     {
     public int id;
-    public int idComprar;
-    public string Nombre;
-    public string Apellido;
-    public int Numero;
+    public int idProducto;
+    public string nombre;
+    public string apellido;
+    public int numero;
     }
+
 
 public static class Inventario
 {
+    public static void Gondolas(Juegos[] catalogo, int[,] gondola)
+    {
+        for (int i = 0; i < gondola.GetLength(0); i++)
+        {
+            //Matriz que valen 1-4 para comparar id
+        }
+    }
+
     public static void Mostrar(Juegos[] catalogo)
     {
         Console.Clear();
-        Console.WriteLine("Id\t\tTitulo\t\tPrecio\t\tCategoria\t\tStock");
+        Console.WriteLine($"{"Id",-4}{"Título",-15}{"Precio",-10}{"Categoria",-15}{"Stock",-8}");
 
         for (int i = 0; i < catalogo.Length; i++)
         {
             if (catalogo[i].id != 0)
             {
-                Console.WriteLine($"{catalogo[i].id}\t\t{catalogo[i].titulo}\t\t{catalogo[i].precio}\t\t{catalogo[i].categoria}\t\t{catalogo[i].stock}");
+                Console.WriteLine($"{catalogo[i].id, -4}{catalogo[i].titulo,-15}{catalogo[i].precio, -10}{catalogo[i].categoria, -15}{catalogo[i].stock, -8}");
             }
         }
         Console.WriteLine("Presione Enter para continuar.");
@@ -75,30 +98,6 @@ public static class Inventario
         catalogo[1] = new Juegos { id = 2, titulo = "Minecraft", precio = 25.99, categoria = "Supervivencia", stock = 30 };
         catalogo[2] = new Juegos { id = 3, titulo = "Cuphead", precio = 9.99, categoria = "Plataformas", stock = 15 };
         catalogo[3] = new Juegos { id = 4, titulo = "No Man's Sky", precio = 19.99, categoria = "Mundo abierto", stock = 60 };
-    }
-
-    public static void AgregarJuego(Juegos[] catalogo)
-    {
-        Console.Clear();
-        int posicion = 1;
-        for (int i = 0; i < catalogo.Count(); i++)
-        {
-            if (catalogo[i].id != 0)
-            {
-                posicion++;
-            }
-        }
-        catalogo[posicion].id = posicion;
-        Console.WriteLine("Ingrese el título del juego.");
-        catalogo[posicion].titulo = Console.ReadLine();
-
-        Console.WriteLine("Ingrese el precio del juego.");
-        double.TryParse(Console.ReadLine(), out catalogo[posicion].precio);
-        Console.WriteLine("Ingrese la categoría del juego.");
-        catalogo[posicion].categoria = Console.ReadLine();
-        Console.WriteLine("Ingrese el stock del juego.");
-        int.TryParse(Console.ReadLine(), out catalogo[posicion].stock);
-        Console.Clear();
     }
 
     public static void BuscarJuego(Juegos[] catalogo)
@@ -116,6 +115,7 @@ public static class Inventario
                 BuscarTitulo(catalogo);
                 break;
             default:
+                Console.Clear();
                 Console.WriteLine("Ingrese una opción válida.");
                 break;
         }
