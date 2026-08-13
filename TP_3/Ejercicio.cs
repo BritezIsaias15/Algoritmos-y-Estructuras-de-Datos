@@ -22,7 +22,7 @@ while (!shutdown)
         case 2:
             Inventario.Mostrar(catalogo);
             break;
-        case 3:
+       /* case 3:
             ConsultarProducto(catalogo);
             break;
         case 4:
@@ -36,7 +36,7 @@ while (!shutdown)
             break;
         case 7:
             shutdown = true;
-            break;
+            break;*/
         default:
             Console.Clear();
             Console.WriteLine("Ingrese una opción válida.");
@@ -55,13 +55,13 @@ public struct Juegos
 }
 
 public struct Cliente
-    {
+{
     public int id;
     public int idProducto;
     public string nombre;
     public string apellido;
     public int numero;
-    }
+}
 
 
 public static class Inventario
@@ -83,7 +83,7 @@ public static class Inventario
         {
             if (catalogo[i].id != 0)
             {
-                Console.WriteLine($"{catalogo[i].id, -4}{catalogo[i].titulo,-15}{catalogo[i].precio, -10}{catalogo[i].categoria, -15}{catalogo[i].stock, -8}");
+                Console.WriteLine($"{catalogo[i].id,-4}{catalogo[i].titulo,-15}{catalogo[i].precio,-10}{catalogo[i].categoria,-15}{catalogo[i].stock,-8}");
             }
         }
         Console.WriteLine("Presione Enter para continuar.");
@@ -135,7 +135,7 @@ public static class Inventario
             {
                 Console.Clear();
                 Console.WriteLine("Id\t\tTitulo\t\tPrecio\t\tCategoria\t\tStock");
-                Console.WriteLine($"{catalogo[i].id}\t{catalogo[i].titulo}\t{catalogo[i].precio}\t{catalogo[i].categoria}\t{catalogo[i].stock}");
+                Console.WriteLine($"{catalogo[i].id, -4}\t{catalogo[i].titulo, -15}\t{catalogo[i].precio, -10}\t{catalogo[i].categoria, -15}\t{catalogo[i].stock, -8}");
                 Console.WriteLine("Presione Enter para continuar.");
                 Console.ReadLine();
                 encont++;
@@ -162,7 +162,7 @@ public static class Inventario
             {
                 Console.Clear();
                 Console.WriteLine("Id\t\tTitulo\t\tPrecio\t\tCategoria\t\tStock");
-                Console.WriteLine($"{catalogo[i].id}\t{catalogo[i].titulo}\t{catalogo[i].precio}\t{catalogo[i].categoria}\t{catalogo[i].stock}");
+                Console.WriteLine($"{catalogo[i].id, -4}\t{catalogo[i].titulo, -15}\t{catalogo[i].precio, -10}\t{catalogo[i].categoria, -15}\t{catalogo[i].stock, -8}");
                 Console.WriteLine("Presione Enter para continuar.");
                 Console.ReadLine();
                 encont++;
