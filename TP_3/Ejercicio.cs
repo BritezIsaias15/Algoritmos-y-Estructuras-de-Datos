@@ -27,7 +27,7 @@ while (!shutdown)
             Gondola.ConsultarProducto(catalogo, gondola);
             break;
         /*case 4:
-            EncolarCliente();
+            Encolar();
             break;
         case 5:
             ConsultarSigCliente();
@@ -64,6 +64,13 @@ public struct Cliente
     public int numero;
 }
 
+public static class Servicio
+{
+    public static void Encolar()
+    {
+
+    }
+}
 
 public static class Gondola
 {
