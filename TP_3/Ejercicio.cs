@@ -78,22 +78,29 @@ public static class Gondola
         bool encontrar = false;
         fila -= 1;
         columna -= 1;
-        Console.WriteLine("Fila:"+ fila);
-        Console.WriteLine("Columna:" + columna);
-        for (int i = 0; i < gondola.GetLength(0) -1; i++)
+
+        if (fila < 0 || fila > gondola.GetLength(0) || columna < 0 || columna > gondola.GetLength(1))
         {
-            for (int j = 0; j < gondola.GetLength(1) -1; j++)
+            Console.WriteLine("Ubicación no válida.");
+            Console.WriteLine("Presione Enter para continuar.");
+            Console.ReadLine();
+            return;
+        }
+
+        int buscar = gondola[fila, columna];
+
+        for (int i = 0; i < catalogo.Length; i++)
+        {
+            if (catalogo[i].id == buscar)
             {
-                if ()
-                {
-                    Console.WriteLine("Id\t\tTitulo\t\tPrecio\t\tCategoria\t\tStock");
-                    Console.WriteLine($"{catalogo[gondola[i,j]].id,-4}\t{catalogo[gondola[i,j]].titulo,-15}\t{catalogo[gondola[i,j]].precio,-10}\t{catalogo[gondola[i,j]].categoria,-15}\t{catalogo[gondola[i,j]].stock,-8}");
-                    Console.WriteLine("Presione Enter para continuar.");
-                    Console.ReadLine();
-                    encontrar = true;
-                }
+                Console.WriteLine("Id\t\tTitulo\t\tPrecio\t\tCategoria\t\tStock");
+                Console.WriteLine($"{catalogo[i].id,-4}\t{catalogo[i].titulo,-15}\t{catalogo[i].precio,-10}\t{catalogo[i].categoria,-15}\t{catalogo[i].stock,-8}");
+                Console.WriteLine("Presione Enter para continuar.");
+                Console.ReadLine();
+                encontrar = true;
             }
         }
+
         if (!encontrar)
         {
             Console.WriteLine("No se ha encontrado productos en esa ubicación.");
@@ -188,7 +195,7 @@ public static class Inventario
         encontrar = false;
         Console.Clear();
     }
-
+    
     private static void BuscarId(Juegos[] catalogo)
     {
         Console.Clear();
