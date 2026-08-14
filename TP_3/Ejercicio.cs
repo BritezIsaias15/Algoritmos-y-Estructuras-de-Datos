@@ -1,10 +1,15 @@
 using System;
+using System.ComponentModel.Design;
+using System.Data;
 using System.Formats.Tar;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 
 bool shutdown = false;
 Juegos[] catalogo = new Juegos[4];
+Cliente[] compra = new Cliente[10];
 int[,] gondola = new int[2, 2];
+int id = 0;
 
 Inventario.CargarCatalogoInicial(catalogo);
 Gondola.Cargar(catalogo, gondola);
@@ -24,10 +29,10 @@ while (!shutdown)
             Inventario.Mostrar(catalogo);
             break;
         case 3:
-            Gondola.ConsultarProducto(catalogo, gondola);
+            Gondola.Consultar(catalogo, gondola);
             break;
         /*case 4:
-            Encolar();
+            Atender();
             break;
         case 5:
             ConsultarSigCliente();
@@ -59,22 +64,30 @@ public struct Cliente
 {
     public int id;
     public int idProducto;
-    public string nombre;
-    public string apellido;
-    public int numero;
 }
 
 public static class Servicio
 {
-    public static void Encolar()
+    public static void Encolar(Cliente[])
     {
+        Console.Clear();
+        Console.WriteLine("")
+    }
 
+    public static void Atender(Cliente[] comprar, int id)
+    {
+        Console.Clear();
+        Console.WriteLine("Ingrese el id del producto que desea vender");
+        int.TryParse(Console.ReadLine(), out int idProducto);
+
+        comprar[id] = new Cliente { id = id, idProducto = idProducto };
+        id++;
     }
 }
 
 public static class Gondola
 {
-    public static void ConsultarProducto(Juegos[] catalogo, int[,] gondola)
+    public static void Consultar(Juegos[] catalogo, int[,] gondola)
     {
         Console.Clear();
         Console.WriteLine("Ingrese la fila del producto que desea buscar.");
