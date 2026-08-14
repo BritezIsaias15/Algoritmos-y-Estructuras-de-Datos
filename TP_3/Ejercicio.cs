@@ -7,11 +7,12 @@ Juegos[] catalogo = new Juegos[4];
 int[,] gondola = new int[2, 2];
 
 Inventario.CargarCatalogoInicial(catalogo);
+Gondola.Cargar(catalogo, gondola);
 Inventario.Mostrar(catalogo);
 
 while (!shutdown)
 {
-    Console.WriteLine($"Ingrese una opción\n1.Buscar videojuego\t2.Mostrar videojuegos");
+    Console.WriteLine($"Ingrese una opción\n1.Buscar videojuego\t2.Mostrar videojuegos\t3.Consultar Gondola\t7.Salir");
     int.TryParse(Console.ReadLine(), out int opcion);
 
     switch (opcion)
@@ -22,26 +23,26 @@ while (!shutdown)
         case 2:
             Inventario.Mostrar(catalogo);
             break;
-       /* case 3:
-            ConsultarProducto(catalogo);
+        case 3:
+            Gondola.ConsultarProducto(catalogo, gondola);
             break;
-        case 4:
+        /*case 4:
             EncolarCliente();
             break;
         case 5:
             ConsultarSigCliente();
             break;
         case 6:
-            CobrarCliente():
-            break;
+            CobrarCliente();
+            break;*/
         case 7:
             shutdown = true;
-            break;*/
-        default:
-            Console.Clear();
-            Console.WriteLine("Ingrese una opción válida.");
-            Console.Clear();
-            break;
+            break; 
+       default:
+           Console.Clear();
+           Console.WriteLine("Ingrese una opción válida.");
+           Console.Clear();
+           break;
     }
 }
 
@@ -64,16 +65,54 @@ public struct Cliente
 }
 
 
+public static class Gondola
+{
+    public static void ConsultarProducto(Juegos[] catalogo, int[,] gondola)
+    {
+        Console.Clear();
+        Console.WriteLine("Ingrese la fila del producto que desea buscar.");
+        int.TryParse(Console.ReadLine(), out int fila);
+        Console.Clear();
+        Console.WriteLine("Ingrese la columna del producto que desea buscar.");
+        int.TryParse(Console.ReadLine(), out int columna);
+        bool encontrar = false;
+        fila -= 1;
+        columna -= 1;
+        Console.WriteLine("Fila:"+ fila);
+        Console.WriteLine("Columna:" + columna);
+        for (int i = 0; i < gondola.GetLength(0) -1; i++)
+        {
+            for (int j = 0; j < gondola.GetLength(1) -1; j++)
+            {
+                if ()
+                {
+                    Console.WriteLine("Id\t\tTitulo\t\tPrecio\t\tCategoria\t\tStock");
+                    Console.WriteLine($"{catalogo[gondola[i,j]].id,-4}\t{catalogo[gondola[i,j]].titulo,-15}\t{catalogo[gondola[i,j]].precio,-10}\t{catalogo[gondola[i,j]].categoria,-15}\t{catalogo[gondola[i,j]].stock,-8}");
+                    Console.WriteLine("Presione Enter para continuar.");
+                    Console.ReadLine();
+                    encontrar = true;
+                }
+            }
+        }
+        if (!encontrar)
+        {
+            Console.WriteLine("No se ha encontrado productos en esa ubicación.");
+            Console.WriteLine("Presione Enter para continuar.");
+            Console.ReadLine();
+        }
+        encontrar = false;
+        Console.Clear();
+    }
+    public static void Cargar(Juegos[] catalogo, int[,] gondola)
+    {
+        gondola[0, 0] = catalogo[0].id;
+        gondola[0, 1] = catalogo[1].id;
+        gondola[1, 0] = catalogo[2].id;
+        gondola[1, 1] = catalogo[3].id;
+    }
+}
 public static class Inventario
 {
-    public static void Gondolas(Juegos[] catalogo, int[,] gondola)
-    {
-        for (int i = 0; i < gondola.GetLength(0); i++)
-        {
-            //Matriz que valen 1-4 para comparar id
-        }
-    }
-
     public static void Mostrar(Juegos[] catalogo)
     {
         Console.Clear();
@@ -121,13 +160,12 @@ public static class Inventario
         }
 
     }
-
     private static void BuscarTitulo(Juegos[] catalogo)
     {
         Console.Clear();
         Console.WriteLine("Ingrese el Titulo del juego que desea buscar.");
         string opcion = Console.ReadLine();
-        int encont = 0;
+        bool encontrar = false;
 
         for (int i = 0; i < catalogo.Count(); i++)
         {
@@ -135,17 +173,19 @@ public static class Inventario
             {
                 Console.Clear();
                 Console.WriteLine("Id\t\tTitulo\t\tPrecio\t\tCategoria\t\tStock");
-                Console.WriteLine($"{catalogo[i].id, -4}\t{catalogo[i].titulo, -15}\t{catalogo[i].precio, -10}\t{catalogo[i].categoria, -15}\t{catalogo[i].stock, -8}");
+                Console.WriteLine($"{catalogo[i].id,-4}\t{catalogo[i].titulo,-15}\t{catalogo[i].precio,-10}\t{catalogo[i].categoria,-15}\t{catalogo[i].stock,-8}");
                 Console.WriteLine("Presione Enter para continuar.");
                 Console.ReadLine();
-                encont++;
+                encontrar = true;
             }
         }
-        if (encont == 0)
+        if (!encontrar)
         {
             Console.WriteLine("No se ha encontrado el juego.");
+            Console.WriteLine("Presione Enter para continuar.");
+            Console.ReadLine();
         }
-        encont = 0;
+        encontrar = false;
         Console.Clear();
     }
 
@@ -154,7 +194,7 @@ public static class Inventario
         Console.Clear();
         Console.WriteLine("Ingrese el Id del juego que desea buscar.");
         int.TryParse(Console.ReadLine(), out int opcion);
-        int encont = 0;
+        bool encontrar = false;
 
         for (int i = 0; i < catalogo.Count(); i++)
         {
@@ -162,17 +202,19 @@ public static class Inventario
             {
                 Console.Clear();
                 Console.WriteLine("Id\t\tTitulo\t\tPrecio\t\tCategoria\t\tStock");
-                Console.WriteLine($"{catalogo[i].id, -4}\t{catalogo[i].titulo, -15}\t{catalogo[i].precio, -10}\t{catalogo[i].categoria, -15}\t{catalogo[i].stock, -8}");
+                Console.WriteLine($"{catalogo[i].id,-4}\t{catalogo[i].titulo,-15}\t{catalogo[i].precio,-10}\t{catalogo[i].categoria,-15}\t{catalogo[i].stock,-8}");
                 Console.WriteLine("Presione Enter para continuar.");
                 Console.ReadLine();
-                encont++;
+                encontrar = true;
             }
         }
-        if (encont == 0)
+        if (!encontrar)
         {
             Console.WriteLine("No se ha encontrado el juego.");
+            Console.WriteLine("Presione Enter para continuar.");
+            Console.ReadLine();
         }
-        encont = 0;
+        encontrar = false;
         Console.Clear();
     }
 }
