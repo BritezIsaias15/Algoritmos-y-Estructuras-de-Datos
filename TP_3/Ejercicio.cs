@@ -4,12 +4,13 @@ using System.Data;
 using System.Formats.Tar;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 
 bool shutdown = false;
 Juegos[] catalogo = new Juegos[4];
-Cliente[] compra = new Cliente[10];
+Cliente[] cliente = new Cliente[10];
+var compra = new Queue<string>();
 int[,] gondola = new int[2, 2];
-int id = 0;
 
 Inventario.CargarCatalogoInicial(catalogo);
 Gondola.Cargar(catalogo, gondola);
@@ -42,12 +43,12 @@ while (!shutdown)
             break;*/
         case 7:
             shutdown = true;
-            break; 
-       default:
-           Console.Clear();
-           Console.WriteLine("Ingrese una opción válida.");
-           Console.Clear();
-           break;
+            break;
+        default:
+            Console.Clear();
+            Console.WriteLine("Ingrese una opción válida.");
+            Console.Clear();
+            break;
     }
 }
 
@@ -68,20 +69,29 @@ public struct Cliente
 
 public static class Servicio
 {
-    public static void Encolar(Cliente[])
+    public static void Encolar()
     {
         Console.Clear();
-        Console.WriteLine("")
+        Console.WriteLine("¿Cuántos clientes desea encolar?");
+        int.TryParse(Console.ReadLine(), out int opcion);
+        Console.Clear();
+        if (opcion < 0)
+        {
+            Console.WriteLine("Cantidad inválida.\nPresione enter para continuar.");
+            Console.ReadLine();
+            return;
+        }
+        else
+        {
+
+
+        }
+
     }
 
     public static void Atender(Cliente[] comprar, int id)
     {
-        Console.Clear();
-        Console.WriteLine("Ingrese el id del producto que desea vender");
-        int.TryParse(Console.ReadLine(), out int idProducto);
 
-        comprar[id] = new Cliente { id = id, idProducto = idProducto };
-        id++;
     }
 }
 
@@ -215,7 +225,7 @@ public static class Inventario
         encontrar = false;
         Console.Clear();
     }
-    
+
     private static void BuscarId(Juegos[] catalogo)
     {
         Console.Clear();
