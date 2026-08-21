@@ -8,7 +8,8 @@ using System.Runtime.InteropServices;
 bool shutdown = false;
 Juegos[] catalogo = new Juegos[16];
 int juego_id = 4;
-Cliente[] compra = new Cliente[10];
+Cliente[] compra = new Cliente[20];
+var cola = new Queue<int>();
 int[,] gondola = new int[4, 4];
 int gondola_id = 4;
 
@@ -18,7 +19,7 @@ Inventario.Mostrar(catalogo);
 
 while (!shutdown)
 {
-    Console.WriteLine($"Ingrese una opción\nInventario\n1.Mostrar videojuego\t2.Buscar videojuegos\t3.Agregar videojuego\nGondola\n4.Consultar gondola\t5. Agregar videojuego\n7.Salir");
+    Console.WriteLine($"Ingrese una opción\nInventario\n1.Mostrar videojuego\t2.Buscar videojuegos\t3.Agregar videojuego\nGondola\n4.Consultar gondola\t5. Agregar videojuego\nServicio\n6.Encolar cliente\t7.Vender\n8.Salir");
     int.TryParse(Console.ReadLine(), out int opcion);
     Console.Clear();
 
@@ -38,6 +39,15 @@ while (!shutdown)
             break;
         case 5:
             Gondola.Agregar(catalogo, ref gondola, ref gondola_id, juego_id);
+            break;
+        case 6:
+            Servicio.Encolar(ref cola);
+            break;
+        case 7:
+            //Servicio.Vender();
+            break;
+        case 8:
+            shutdown = true;
             break;
         default:
             Console.Clear();
@@ -62,12 +72,31 @@ public struct Cliente
     public int idProducto;
 }
 
-/*public static class Servicio
+public static class Servicio
 {
-    public static void Encolar(Cliente[])
+    public static void Encolar(ref Queue<int> cola)
     {
-        Console.Clear();
-        Console.WriteLine("")
+        Console.WriteLine("Ingrese la cantidad de clientes actuales en la cola.");
+        int.TryParse(Console.ReadLine(), out int clientes);
+        if (clientes <= 0)
+        {
+            Console.WriteLine("Cantidad inválida.\nPresione Enter para continuar.");
+            Console.ReadLine();
+            return;
+        }
+        else if (clientes > 20)
+        {
+            Console.WriteLine("Exceso de clientes.\nPresione Enter para continuar.");
+            Console.ReadLine();
+            return;
+        }
+        else
+        {
+            for (int i = 0; i < clientes; i++)
+            {
+                cola.Enqueue(i);
+            }
+        }
     }
 
     public static void Atender(Cliente[] comprar, int id)
@@ -79,7 +108,7 @@ public struct Cliente
         comprar[id] = new Cliente { id = id, idProducto = idProducto };
         id++;
     }
-}*/
+}
 
 public static class Gondola
 {
