@@ -9,6 +9,7 @@ bool shutdown = false;
 Juegos[] catalogo = new Juegos[16];
 int juego_id = 4;
 Cliente[] compra = new Cliente[20];
+int cliente_id = 1;
 var cola = new Queue<int>();
 int[,] gondola = new int[4, 4];
 int gondola_id = 4;
@@ -41,7 +42,7 @@ while (!shutdown)
             Gondola.Agregar(catalogo, ref gondola, ref gondola_id, juego_id);
             break;
         case 6:
-            Servicio.Encolar(ref cola);
+            Servicio.Encolar(ref cola, ref cliente_id);
             break;
         case 7:
             //Servicio.Vender();
@@ -74,7 +75,7 @@ public struct Cliente
 
 public static class Servicio
 {
-    public static void Encolar(ref Queue<int> cola)
+    public static void Encolar(ref Queue<int> cola, ref int cliente_id)
     {
         Console.WriteLine("Ingrese la cantidad de clientes actuales en la cola.");
         int.TryParse(Console.ReadLine(), out int clientes);
@@ -90,23 +91,71 @@ public static class Servicio
             Console.ReadLine();
             return;
         }
+        else if (cola.Count() >= 20)
+        {
+            Console.WriteLine("Cola llena.\nPresione Enter para continuar.");
+            Console.ReadLine();
+            return;
+        }
         else
         {
             for (int i = 0; i < clientes; i++)
             {
-                cola.Enqueue(i);
+                cola.Enqueue(cliente_id);
+                cliente_id++;
             }
         }
     }
 
-    public static void Atender(Cliente[] comprar, int id)
+    public static void Atender(Cliente[] comprar, Juegos[] catalogo, ref Queue<int> cola)
     {
         Console.Clear();
-        Console.WriteLine("Ingrese el id del producto que desea vender");
-        int.TryParse(Console.ReadLine(), out int idProducto);
+        Console.WriteLine($"Cliente N°{cola.Peek}\nIngrese el id del producto que desea comprar.");
+        int.TryParse(Console.ReadLine(), out int producto_id);
+        
+        Console.WriteLine("¿Cuántos copias desea comprar?");
+        int.TryParse(Console.ReadLine(), out int cant);
+        for (int i = 0; i < catalogo.Count(); i++)
+        {
+            if (i == producto_id)
+            {
+                if (cant > catalogo[i].stock)
+                {
+                    Console.WriteLine("No hay suficientes copias disponibles.\nPresione Enter para continuar.");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.WriteLine($"Confirmar compra del juego {catalogo[i].titulo}\nY:Yes\tN:No");
+                    char.TryParse(Console.ReadLine(), out char input);
+                    if (input == 'Y')
+                    {
+                        catalogo[i].stock -= cant;
+                        comprar[cola.Peek()] = new Cliente { id = cola.Dequeue(), idProducto = producto_id };
+                        Console.WriteLine("Gracias por su compra.\nPresione Enter para continuar.");
+                        Console.ReadLine();
+                        Console.Clear();
+                        return;
+                    }
+                    if (input == 'N')
+                    {
+                        Console.WriteLine("Cancelando compra...\nPresione Enter para continuar.");
+                        Console.ReadLine();
+                        Console.Clear();
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Respuesta inválida.\nPresione Enter para continuar.");
+                        Console.ReadLine();
+                        Console.Clear();
+                        return;
+                    }
+                }
+            }
+        }
 
-        comprar[id] = new Cliente { id = id, idProducto = idProducto };
-        id++;
     }
 }
 
