@@ -45,14 +45,14 @@ while (!shutdown)
             Servicio.Encolar(ref cola, ref cliente_id);
             break;
         case 7:
-            //Servicio.Vender();
+            Servicio.Atender(ref compra, ref catalogo, ref cola);
             break;
         case 8:
             shutdown = true;
             break;
         default:
-            Console.Clear();
-            Console.WriteLine("Ingrese una opción válida.");
+            Console.WriteLine("Ingrese una opción válida.\nPresione Enter para continuar.");
+            Console.ReadLine();
             Console.Clear();
             break;
     }
@@ -107,50 +107,60 @@ public static class Servicio
         }
     }
 
-    public static void Atender(Cliente[] comprar, Juegos[] catalogo, ref Queue<int> cola)
+    public static void Atender(ref Cliente[] compra, ref Juegos[] catalogo, ref Queue<int> cola)
     {
+        if (cola.Count() == 0)
+        {
+            Console.WriteLine("No hay clientes.\nPresione Enter para continuar.");
+            Console.ReadLine();
+            Console.Clear();
+            return;
+        }
+        else
+        { 
         Console.Clear();
-        Console.WriteLine($"Cliente N°{cola.Peek}\nIngrese el id del producto que desea comprar.");
+        Console.WriteLine($"Cliente N°{cola.Peek()}\nIngrese el id del producto que desea comprar.");
         int.TryParse(Console.ReadLine(), out int producto_id);
         
         Console.WriteLine("¿Cuántos copias desea comprar?");
         int.TryParse(Console.ReadLine(), out int cant);
-        for (int i = 0; i < catalogo.Count(); i++)
-        {
-            if (i == producto_id)
+            for (int i = 0; i < catalogo.Count(); i++)
             {
-                if (cant > catalogo[i].stock)
+                if (i == producto_id - 1)
                 {
-                    Console.WriteLine("No hay suficientes copias disponibles.\nPresione Enter para continuar.");
-                    Console.ReadLine();
-                    Console.Clear();
-                }
-                else
-                {
-                    Console.WriteLine($"Confirmar compra del juego {catalogo[i].titulo}\nY:Yes\tN:No");
-                    char.TryParse(Console.ReadLine(), out char input);
-                    if (input == 'Y')
+                    if (cant > catalogo[i].stock)
                     {
-                        catalogo[i].stock -= cant;
-                        comprar[cola.Peek()] = new Cliente { id = cola.Dequeue(), idProducto = producto_id };
-                        Console.WriteLine("Gracias por su compra.\nPresione Enter para continuar.");
+                        Console.WriteLine("No hay suficientes copias disponibles o no existe ese juego.\nPresione Enter para continuar.");
                         Console.ReadLine();
                         Console.Clear();
-                        return;
-                    }
-                    if (input == 'N')
-                    {
-                        Console.WriteLine("Cancelando compra...\nPresione Enter para continuar.");
-                        Console.ReadLine();
-                        Console.Clear();
-                        return;
                     }
                     else
                     {
-                        Console.WriteLine("Respuesta inválida.\nPresione Enter para continuar.");
-                        Console.ReadLine();
-                        Console.Clear();
-                        return;
+                        Console.WriteLine($"Confirmar compra del juego {catalogo[i].titulo}\nY:Yes\tN:No");
+                        char.TryParse(Console.ReadLine(), out char input);
+                        if (input == 'Y')
+                        {
+                            compra[cola.Peek()] = new Cliente { id = cola.Dequeue(), idProducto = producto_id };
+                            catalogo[i].stock -= cant;
+                            Console.WriteLine("Gracias por su compra.\nPresione Enter para continuar.");
+                            Console.ReadLine();
+                            Console.Clear();
+                            return;
+                        }
+                        if (input == 'N')
+                        {
+                            Console.WriteLine("Cancelando compra...\nPresione Enter para continuar.");
+                            Console.ReadLine();
+                            Console.Clear();
+                            return;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Respuesta inválida.\nPresione Enter para continuar.");
+                            Console.ReadLine();
+                            Console.Clear();
+                            return;
+                        }
                     }
                 }
             }
