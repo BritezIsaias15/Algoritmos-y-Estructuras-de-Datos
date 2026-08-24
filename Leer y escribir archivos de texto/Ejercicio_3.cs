@@ -22,7 +22,7 @@ using (StreamReader sr = new StreamReader(ruta))
 
         Console.WriteLine("Información");
         Console.WriteLine($"Cantidad de caracteres: {caracteres}");
-        Console.WriteLine($"Cantidad de palabras: {palabras}");
+        Console.WriteLine($"Cantidad de palabras: {palabras.Length}");
     }
     else
     {
