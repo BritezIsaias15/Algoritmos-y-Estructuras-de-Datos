@@ -11,7 +11,7 @@ using (StreamWriter sw = new StreamWriter(salida, false))
     sw.WriteLine($"Nombre: {nombre}.");
     sw.WriteLine($"Frase favorita: {frase}.");
 }
-using (StreamWriter sw = new StreamWriter(salida, false))
+using (StreamWriter sw = new StreamWriter(salida, true))
 {
     sw.WriteLine($"Última acutalización: {DateTime.Now}");
 }
