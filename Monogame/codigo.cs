@@ -3,13 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Runtime.InteropServices;
 
-namespace AstonMchan
+namespace Proyecto
 {
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Texture2D _alex;
+        private Texture2D _frisk;
         private float velocidadGlobal = 5.0f;
         private Vector2 posicion = Vector2.Zero;
 
@@ -30,7 +30,7 @@ namespace AstonMchan
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _alex = Content.Load<Texture2D>("images/_alex");
+            _frisk = Content.Load<Texture2D>("images/frisksheet");
             // TODO: use this.Content to load your game content here
         }
 
@@ -51,9 +51,9 @@ namespace AstonMchan
 
             _spriteBatch.Begin();
 
-            _spriteBatch.Draw(_alex, new Vector2(100, 100), Color.White);
-            Rectangle spriteAlex = new Rectangle(0, 0, 48, 64);
-            _spriteBatch.Draw(_alex, posicion, spriteAlex, Color.White);
+            _spriteBatch.Draw(_frisk, new Vector2(100, 100), Color.White);
+            Rectangle spriteFrisk = new Rectangle(0, 0, 48, 64);
+            _spriteBatch.Draw(_frisk, posicion, spriteFrisk, Color.White);
 
             // TODO: Add your drawing code here
 
