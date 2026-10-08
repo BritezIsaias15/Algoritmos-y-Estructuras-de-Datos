@@ -52,7 +52,7 @@ namespace Proyecto
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(_frisk, new Vector2(100, 100), Color.White);
-            Rectangle spriteFrisk = new Rectangle(0, 0, 48, 64);
+            Rectangle spriteFrisk = new Rectangle(0, 0, 24, 34);
             _spriteBatch.Draw(_frisk, posicion, spriteFrisk, Color.White);
 
             // TODO: Add your drawing code here
