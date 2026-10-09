@@ -22,11 +22,12 @@ namespace Project1
         int threshold;
 
         // A Rectangle array that stores sourceRectangles for animations.
-        Rectangle[] gligarRectangle;
+        Rectangle[,] gligarRectangle;
 
         // These bytes tell the spriteBatch.Draw() what sourceRectangle to display.
         byte previousAnimationIndex;
         byte currentAnimationIndex;
+        int direction;
 
         public Game1()
         {
@@ -54,15 +55,36 @@ namespace Project1
 
             threshold = 250;
 
-            gligarRectangle = new Rectangle[4];
-            gligarRectangle[0] = new Rectangle(90, 39, 29, 29); //abajo
-            gligarRectangle[1] = new Rectangle(85, 72, 32, 32); //arriba
-            gligarRectangle[2] = new Rectangle(85, 104, 32, 32);//izquierda
-            gligarRectangle[3] = new Rectangle(85, 136, 32, 32);//derecha
+            int direction = 0;
+
+            gligarRectangle = new Rectangle[8, 3];
+            gligarRectangle[0, 0] = new Rectangle(90, 39, 29, 29); //abajo
+            gligarRectangle[0, 1] = new Rectangle(126, 39, 33, 30);
+            gligarRectangle[0, 2] = new Rectangle(162, 38, 35, 32);
+            gligarRectangle[1, 0] = new Rectangle(91, 71, 34, 36); //arriba
+            gligarRectangle[1, 1] = new Rectangle(126, 71, 34, 36);
+            gligarRectangle[1, 2] = new Rectangle(164, 71, 34, 36);
+            gligarRectangle[2, 0] = new Rectangle(98, 113, 25, 34);//izquierda
+            gligarRectangle[2, 1] = new Rectangle(130, 110, 25, 36);
+            gligarRectangle[2, 2] = new Rectangle(169, 109, 24, 36);
+            gligarRectangle[3, 0] = new Rectangle(98, 151, 25, 34);//derecha
+            gligarRectangle[3, 1] = new Rectangle(133, 149, 25, 36);
+            gligarRectangle[3, 2] = new Rectangle(171, 149, 24, 36);
+            gligarRectangle[4, 0] = new Rectangle(171, 149, 24, 36);//abajo-izquierda
+            gligarRectangle[4, 1] = new Rectangle(171, 149, 24, 36);
+            gligarRectangle[4, 2] = new Rectangle(171, 149, 24, 36);
+            gligarRectangle[5, 0] = new Rectangle(171, 149, 24, 36);//abajo-derecha
+            gligarRectangle[5, 1] = new Rectangle(171, 149, 24, 36);
+            gligarRectangle[5, 2] = new Rectangle(171, 149, 24, 36);
+            gligarRectangle[6, 0] = new Rectangle(171, 149, 24, 36);//arriba-izquierda
+            gligarRectangle[6, 1] = new Rectangle(171, 149, 24, 36);
+            gligarRectangle[6, 2] = new Rectangle(171, 149, 24, 36);
+            gligarRectangle[7, 0] = new Rectangle(171, 149, 24, 36);//arriba-derecha
+            gligarRectangle[7, 1] = new Rectangle(171, 149, 24, 36);
+            gligarRectangle[7, 2] = new Rectangle(171, 149, 24, 36);
 
             previousAnimationIndex = 2;
             currentAnimationIndex = 1;
-
 
         }
 
@@ -98,7 +120,7 @@ namespace Project1
             _spriteBatch.Draw(
             _gligar,
             gligarPosition,
-            gligarRectangle[0],
+            gligarRectangle[direction, currentAnimationIndex],
             Color.White,
             0.0f,               // Rotación
             Vector2.Zero,       // Origen (pivote)
@@ -115,29 +137,30 @@ namespace Project1
             float velocidadMovimiento = velocidadGlobal;
             KeyboardState teclaPresionada = Keyboard.GetState();
 
-            if (teclaPresionada.IsKeyDown(Keys.W) || teclaPresionada.IsKeyDown(Keys.Up))
+            if (teclaPresionada.IsKeyDown(Keys.W))
             {
                 gligarPosition.Y -= velocidadGlobal;
-                currentAnimationIndex = 1;
+                direction = 1;
             }
-
-            if (teclaPresionada.IsKeyDown(Keys.S) || teclaPresionada.IsKeyDown(Keys.Down))
+            
+            if (teclaPresionada.IsKeyDown(Keys.S))
             {
                 gligarPosition.Y += velocidadGlobal;
-                currentAnimationIndex = 0;
+                direction = 0;
             }
 
-            if (teclaPresionada.IsKeyDown(Keys.A) || teclaPresionada.IsKeyDown(Keys.Left))
+            if (teclaPresionada.IsKeyDown(Keys.A))
             {
                 gligarPosition.X -= velocidadGlobal;
-                currentAnimationIndex = 2;
+                direction = 2;
             }
 
-            if (teclaPresionada.IsKeyDown(Keys.D) || teclaPresionada.IsKeyDown(Keys.Right))
+            if (teclaPresionada.IsKeyDown(Keys.D))
             {
                 gligarPosition.X += velocidadGlobal;
-                currentAnimationIndex = 3;
+                direction = 3;
             }
+            animation(gameTime);
         }
 
         void animation(GameTime gameTime)
