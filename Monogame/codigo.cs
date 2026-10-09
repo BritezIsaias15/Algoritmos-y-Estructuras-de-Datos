@@ -55,7 +55,7 @@ namespace Project1
             threshold = 250;
 
             gligarRectangle = new Rectangle[4];
-            gligarRectangle[0] = new Rectangle(85, 40, 32, 32); //abajo
+            gligarRectangle[0] = new Rectangle(90, 39, 29, 29); //abajo
             gligarRectangle[1] = new Rectangle(85, 72, 32, 32); //arriba
             gligarRectangle[2] = new Rectangle(85, 104, 32, 32);//izquierda
             gligarRectangle[3] = new Rectangle(85, 136, 32, 32);//derecha
@@ -71,7 +71,8 @@ namespace Project1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            movimientoTeclado();
+            movimientoTeclado(gameTime);
+            //animation(gameTime);
 
             base.Update(gameTime);
 
@@ -81,7 +82,8 @@ namespace Project1
         {
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
+
             _spriteBatch.Draw
             (_background,
             new Vector2(-75, 0),
@@ -92,12 +94,23 @@ namespace Project1
             2.2f,
             SpriteEffects.None,
             0.0f);
-            _spriteBatch.Draw(_gligar, gligarPosition, gligarRectangle[0], Color.White);
+
+            _spriteBatch.Draw(
+            _gligar,
+            gligarPosition,
+            gligarRectangle[0],
+            Color.White,
+            0.0f,               // Rotación
+            Vector2.Zero,       // Origen (pivote)
+            2.0f,       // ESCALA (Aquí cambias el tamaño)
+            SpriteEffects.None, // Efectos de espejo
+            0.0f                // Capa de profundidad
+            );
 
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-        void movimientoTeclado()
+        void movimientoTeclado(GameTime gameTime)
         {
             float velocidadMovimiento = velocidadGlobal;
             KeyboardState teclaPresionada = Keyboard.GetState();
@@ -105,21 +118,53 @@ namespace Project1
             if (teclaPresionada.IsKeyDown(Keys.W) || teclaPresionada.IsKeyDown(Keys.Up))
             {
                 gligarPosition.Y -= velocidadGlobal;
+                currentAnimationIndex = 1;
             }
 
             if (teclaPresionada.IsKeyDown(Keys.S) || teclaPresionada.IsKeyDown(Keys.Down))
             {
                 gligarPosition.Y += velocidadGlobal;
+                currentAnimationIndex = 0;
             }
 
             if (teclaPresionada.IsKeyDown(Keys.A) || teclaPresionada.IsKeyDown(Keys.Left))
             {
                 gligarPosition.X -= velocidadGlobal;
+                currentAnimationIndex = 2;
             }
 
             if (teclaPresionada.IsKeyDown(Keys.D) || teclaPresionada.IsKeyDown(Keys.Right))
             {
                 gligarPosition.X += velocidadGlobal;
+                currentAnimationIndex = 3;
+            }
+        }
+
+        void animation(GameTime gameTime)
+        {
+            if (timer > threshold)
+            {
+                if (currentAnimationIndex == 1)
+                {
+                    if (previousAnimationIndex == 0)
+                    {
+                        currentAnimationIndex = 2;
+                    }
+                    else
+                    {
+                        currentAnimationIndex = 0;
+                    }
+                    previousAnimationIndex = currentAnimationIndex;
+                }
+                else
+                {
+                    currentAnimationIndex = 1;
+                }
+                timer = 0;
+            }
+            else
+            {
+                timer += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
         }
     }
