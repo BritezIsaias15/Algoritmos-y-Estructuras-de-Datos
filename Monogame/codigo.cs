@@ -55,8 +55,6 @@ namespace Project1
 
             threshold = 250;
 
-            int direction = 0;
-
             gligarRectangle = new Rectangle[8, 3];
             gligarRectangle[0, 0] = new Rectangle(90, 39, 29, 29); //abajo
             gligarRectangle[0, 1] = new Rectangle(126, 39, 33, 30);
@@ -70,15 +68,15 @@ namespace Project1
             gligarRectangle[3, 0] = new Rectangle(98, 151, 25, 34);//derecha
             gligarRectangle[3, 1] = new Rectangle(133, 149, 25, 36);
             gligarRectangle[3, 2] = new Rectangle(171, 149, 24, 36);
-            gligarRectangle[4, 0] = new Rectangle(171, 149, 24, 36);//abajo-izquierda
-            gligarRectangle[4, 1] = new Rectangle(171, 149, 24, 36);
-            gligarRectangle[4, 2] = new Rectangle(171, 149, 24, 36);
-            gligarRectangle[5, 0] = new Rectangle(171, 149, 24, 36);//abajo-derecha
-            gligarRectangle[5, 1] = new Rectangle(171, 149, 24, 36);
-            gligarRectangle[5, 2] = new Rectangle(171, 149, 24, 36);
-            gligarRectangle[6, 0] = new Rectangle(171, 149, 24, 36);//arriba-izquierda
-            gligarRectangle[6, 1] = new Rectangle(171, 149, 24, 36);
-            gligarRectangle[6, 2] = new Rectangle(171, 149, 24, 36);
+            gligarRectangle[4, 0] = new Rectangle(98, 185, 28, 38);//abajo-izquierda
+            gligarRectangle[4, 1] = new Rectangle(133, 185, 28, 38);
+            gligarRectangle[4, 2] = new Rectangle(172, 185, 28, 38);
+            gligarRectangle[5, 0] = new Rectangle(102, 222, 28, 39);//abajo-derecha
+            gligarRectangle[5, 1] = new Rectangle(136, 222, 28, 39);
+            gligarRectangle[5, 2] = new Rectangle(173, 222, 28, 39);
+            gligarRectangle[6, 0] = new Rectangle(99, 264, 27, 39);//arriba-izquierda
+            gligarRectangle[6, 1] = new Rectangle(134, 264, 27, 39);
+            gligarRectangle[6, 2] = new Rectangle(174, 264, 27, 39);
             gligarRectangle[7, 0] = new Rectangle(171, 149, 24, 36);//arriba-derecha
             gligarRectangle[7, 1] = new Rectangle(171, 149, 24, 36);
             gligarRectangle[7, 2] = new Rectangle(171, 149, 24, 36);
